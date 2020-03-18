@@ -1,6 +1,6 @@
 class ChaptersController < ApplicationController
     def index
-        chapers = Chapter.all
+        chapters = Chapter.all
         render json: chapters 
     end
 end
