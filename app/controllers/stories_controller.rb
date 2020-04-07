@@ -9,4 +9,8 @@ class StoriesController < ApplicationController
         story = Story.find(params[:id])
         render json: story
     end
+
+    def last
+        render json: {message: "last right here"}
+    end
 end
