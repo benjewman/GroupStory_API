@@ -1,3 +1,5 @@
+require 'faker'
+
 class StoriesController < ApplicationController
     def index
         stories = Story.all
@@ -11,6 +13,14 @@ class StoriesController < ApplicationController
     end
 
     def last
-        render json: {message: "last right here"}
+        story = Story.last
+        if story.chapters.length < 5
+            render json: story
+        else
+            title = Faker::Book.title
+            new_story = Story.create(title: title)
+            render json: new_story
+        end
+        # render json: {message: "last right here", story: story}
     end
 end
