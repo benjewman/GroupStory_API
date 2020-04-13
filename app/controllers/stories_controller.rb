@@ -5,7 +5,8 @@ class StoriesController < ApplicationController
     def index
         stories = Story.all
         finished_stories = stories.select {|story| story.chapters.length === 5}
-        render json: finished_stories 
+        stories_by_new = finished_stories.reverse
+        render json: stories_by_new
     end
 
     def show
