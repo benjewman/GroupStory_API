@@ -1,6 +1,7 @@
 require 'faker'
 
 class StoriesController < ApplicationController
+    
     def index
         stories = Story.all
         finished_stories = stories.select {|story| story.chapters.length === 5}
@@ -21,6 +22,6 @@ class StoriesController < ApplicationController
             new_story = Story.create(title: title)
             render json: new_story
         end
-        # render json: {message: "last right here", story: story}
     end
+
 end
