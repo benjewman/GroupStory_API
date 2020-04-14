@@ -9,7 +9,7 @@ class ChaptersController < ApplicationController
         if chapter.save
             render json: chapter
         else
-            render json: {message: "could not save"}
+            render json: {message: chapter.errors.full_messages.first}
         end
     end
 
