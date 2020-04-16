@@ -1,10 +1,10 @@
 class StorySerializer < ActiveModel::Serializer
-  attributes :id, :title, :chapters
+  attributes :id, :title, :chapters, :word_count
 
-  # def chapters
-  #   # access this story's chapters and sort by the order number
-  #   # maybe we don't need the order number and can sort by created_at
-  #   # self.chapters.sort_by { |chapter| chapter.created_at }
-  #   self.chapters
-  # end
+  def word_count
+    chapter_content = object.chapters.map {| chapter | chapter.content }
+    full_story = chapter_content.join(" ")
+    word_array = full_story.split(" ")
+    return word_array.length()
+  end
 end
