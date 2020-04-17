@@ -5,7 +5,12 @@ class ChaptersController < ApplicationController
     end
 
     def create
+        # create conditional when creating chapter that if the chapter's story has 5 chapters
+        # email all those users who provided emails that they're story is finished
         chapter = Chapter.new(content: chapter_params[:content], story_id: chapter_params[:story_id])
+        if chapter_params[:email].include? "@" 
+            chapter.email = chapter_params[:email] 
+        end
         if chapter.save
             render json: chapter
         else
@@ -15,6 +20,6 @@ class ChaptersController < ApplicationController
 
     private
     def chapter_params
-        params.require(:chapter).permit(:content, :story_id)
+        params.require(:chapter).permit(:content, :story_id, :email)
     end
 end
