@@ -12,6 +12,9 @@ class ChaptersController < ApplicationController
             chapter.email = chapter_params[:email] 
         end
         if chapter.save
+            if chapter.story.chapters.length === 5
+                ChapterMailer.with(story: chapter.story).finished_story_email.deliver_now
+            end
             render json: chapter
         else
             render json: {message: chapter.errors.full_messages.first}
